@@ -20,9 +20,6 @@ public class FileSearch {
         // load paragraphs only
         Elements paragraphs = dallowayText.select("p");
 
-        // get "value" (basically get rid of all the random html)
-        //String value = paragraphs.text();
-
         // num of hyphens
         int hyphenCount = 0;
 
