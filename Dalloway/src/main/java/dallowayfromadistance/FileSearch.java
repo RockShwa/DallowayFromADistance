@@ -6,6 +6,7 @@ package dallowayfromadistance;
 import org.jsoup.nodes.Document;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
+import org.jsoup.nodes.Element;
 
 public class FileSearch {
     static Document dallowayText;
@@ -20,18 +21,22 @@ public class FileSearch {
         Elements paragraphs = dallowayText.select("p");
 
         // get "value" (basically get rid of all the random html)
-        String value = paragraphs.text();
+        //String value = paragraphs.text();
 
         // num of hyphens
         int hyphenCount = 0;
 
-        // iterate through string to find # of hyphens
-        for (int i = 0; i < value.length(); i++) {
-            if (value.charAt(i) == '-') {
-                hyphenCount++;
-            }
-        }
+        for (Element p : paragraphs) {
+            String paragraph = p.text();
+            hyphenCount = 0;
 
-        System.out.println(hyphenCount);
+            // iterate through string to find # of hyphens
+            for (int i = 0; i < paragraph.length(); i++) {
+                if (paragraph.charAt(i) == '-') {
+                    hyphenCount++;
+                }
+            }
+            System.out.println(hyphenCount);
+        }
     }
 }
