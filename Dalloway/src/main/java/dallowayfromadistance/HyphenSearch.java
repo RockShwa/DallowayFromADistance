@@ -60,13 +60,16 @@ public class HyphenSearch {
 
         //iterate through string to find # of hyphens
         for (int p = 0; p < fullSplitText.size(); p++) {
-            System.out.print("Page " + (p + 3) + ": ");
+            //System.out.print("Page " + (p + 3) + ": ");
             hyphenCount = 0;
             for (int w = 0; w < fullSplitText.get(p).length; w++) {
                 if (fullSplitText.get(p)[w].contains("-")) {
                     hyphenCount++;
                 } 
                 if (fullSplitText.get(p)[w].contains("—")) {
+                    hyphenCount++;
+                }
+                if (fullSplitText.get(p)[w].contains("–")) {
                     hyphenCount++;
                 }
             }

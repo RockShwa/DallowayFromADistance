@@ -57,7 +57,7 @@ public class ParenthesisSearch {
 
         // iterate through string to find # of parenthesis
         for (int p = 0; p < fullSplitText.size(); p++) {
-            System.out.print("Page " + (p + 3) + ": ");
+            //System.out.print("Page " + (p + 3) + ": ");
             parenthesisCount = 0;
             for (int w = 0; w < fullSplitText.get(p).length; w++) {
                 if (fullSplitText.get(p)[w].contains("(")) {
