@@ -36,12 +36,23 @@ public class HyphenSearch {
             pages.add(stringPages[i]);
         }
 
+        // cuts out all the copywrite stuff
+        int lastPageIndex = pages.size()-1;
+        String lastPage = pages.get(lastPageIndex).substring(0, pages.get(lastPageIndex).indexOf("THE END"));
+
         ArrayList<String[]> fullSplitText = new ArrayList<>(); 
 
         // add word arrays to ArrayList
         for (int i = 0; i < pages.size(); i++) {
             fullSplitText.add(stringPages[i].split(" "));
         }
+
+        // for (int i = 0; i < fullSplitText.size(); i++) {
+        //     System.out.println(Arrays.toString(fullSplitText.get(i)));
+        // }
+
+        // sets last page correctly w/o copywrite stuff
+        fullSplitText.set(fullSplitText.size() - 1, lastPage.split(" "));
 
         // for (int i = 0; i < fullSplitText.size(); i++) {
         //     System.out.println(Arrays.toString(fullSplitText.get(i)));
