@@ -8,7 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
 
-public class FileSearch {
+public class DallowaySearch {
     static Document dallowayText;
     public static void main(String[] args) {
         try {
@@ -18,22 +18,27 @@ public class FileSearch {
         }
 
         // load paragraphs only
-        Elements paragraphs = dallowayText.select("p");
+        Elements paragraphs = dallowayText.select("span");
+
+        System.out.println(paragraphs);
 
         // num of hyphens
-        int hyphenCount = 0;
+        int dallowayCount = 0;
+        int clarissaCount = 0;
 
         for (Element p : paragraphs) {
             String paragraph = p.text();
-            hyphenCount = 0;
+            dallowayCount = 0;
+            clarissaCount = 0;
 
             // iterate through string to find # of hyphens
-            for (int i = 0; i < paragraph.length(); i++) {
-                if (paragraph.charAt(i) == '-') {
-                    hyphenCount++;
-                }
-            }
-            System.out.println(hyphenCount);
+        //     for (int i = 0; i < paragraph.length(); i++) {
+        //         if (paragraph.charAt(i) == '-') {
+        //             hyphenCount++;
+        //         }
+        //     }
+        //     System.out.println(hyphenCount);
+        // }
         }
     }
 }

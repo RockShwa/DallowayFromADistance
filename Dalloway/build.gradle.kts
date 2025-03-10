@@ -30,7 +30,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("dallowayfromadistance.FileSearch")
+    mainClass.set("dallowayfromadistance.HyphenSearch")
 }
 
 tasks.named<Test>("test") {
