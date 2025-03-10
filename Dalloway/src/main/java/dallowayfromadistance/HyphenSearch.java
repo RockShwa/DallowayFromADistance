@@ -6,8 +6,6 @@ package dallowayfromadistance;
 import org.jsoup.nodes.Document;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.jsoup.nodes.Element;
-
 import java.util.*;
 
 public class HyphenSearch {
@@ -23,13 +21,11 @@ public class HyphenSearch {
         // load paragraphs only
         String text = dallowayText.text();
 
-        //System.out.println(text);
+        Elements paragraphs = dallowayText.select("p");
+        System.out.println(paragraphs);
 
         // num of hyphens
         int hyphenCount = 0;
-
-        // page nums
-        int pageNumbers = 3;
 
         String[] stringPages = text.split("Pg\\s+\\d+");
 
@@ -45,15 +41,15 @@ public class HyphenSearch {
             fullSplitText.add(stringPages[i].split(" "));
         }
 
-        for (int i = 0; i < fullSplitText.size(); i++) {
-            System.out.println(Arrays.toString(fullSplitText.get(i)));
-        }
+        // for (int i = 0; i < fullSplitText.size(); i++) {
+        //     System.out.println(Arrays.toString(fullSplitText.get(i)));
+        // }
 
         hyphenCount = 0;
 
         //iterate through string to find # of hyphens
         for (int p = 0; p < fullSplitText.size(); p++) {
-            //System.out.print("page " + p + ": ");
+            System.out.print("page " + (p + 3) + ": ");
             hyphenCount = 0;
             for (int w = 0; w < fullSplitText.get(p).length; w++) {
                 if (fullSplitText.get(p)[w].contains("-")) {
@@ -63,7 +59,7 @@ public class HyphenSearch {
                     hyphenCount++;
                 }
             }
-            //System.out.println(hyphenCount);
+            System.out.println(hyphenCount);
         }
     }
 }
