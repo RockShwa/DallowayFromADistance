@@ -4,9 +4,11 @@
 package dallowayfromadistance;
 
 import org.jsoup.nodes.Document;
+
+import java.util.ArrayList;
+
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.jsoup.nodes.Element;
 
 public class DallowaySearch {
     static Document dallowayText;
@@ -17,28 +19,52 @@ public class DallowaySearch {
             System.out.println("Couldn't fetch the file!");
         }
 
-        // load paragraphs only
-        Elements paragraphs = dallowayText.select("span");
+        // load text into a String
+        String text = dallowayText.text();
 
-        System.out.println(paragraphs);
+        // Elements paragraphs = dallowayText.select("p");
+        // System.out.println(paragraphs);
 
-        // num of hyphens
+        // num of names
         int dallowayCount = 0;
         int clarissaCount = 0;
 
-        for (Element p : paragraphs) {
-            String paragraph = p.text();
-            dallowayCount = 0;
-            clarissaCount = 0;
+        String[] stringPages = text.split("Pg\\s+\\d+");
 
-            // iterate through string to find # of hyphens
-        //     for (int i = 0; i < paragraph.length(); i++) {
-        //         if (paragraph.charAt(i) == '-') {
-        //             hyphenCount++;
-        //         }
-        //     }
-        //     System.out.println(hyphenCount);
+        ArrayList<String> pages = new ArrayList<>();
+
+        // add pages to ArrayList
+        for (int i = 0; i < stringPages.length; i++) {
+            pages.add(stringPages[i]);
+        }
+
+        ArrayList<String[]> fullSplitText = new ArrayList<>(); 
+
+        // add word arrays to ArrayList
+        for (int i = 0; i < pages.size(); i++) {
+            fullSplitText.add(stringPages[i].split(" "));
+        }
+
+        // for (int i = 0; i < fullSplitText.size(); i++) {
+        //     System.out.println(Arrays.toString(fullSplitText.get(i)));
         // }
+
+        //iterate through string to find # of names
+        for (int p = 0; p < fullSplitText.size(); p++) {
+            clarissaCount = 0;
+            dallowayCount = 0;
+
+            for (int w = 0; w < fullSplitText.get(p).length; w++) {
+                // how many are split on hyphens?
+                if (fullSplitText.get(p)[w].contains("Clarissa")) {
+                    clarissaCount++;
+                } 
+                if (fullSplitText.get(p)[w].contains("Dalloway")) {
+                    dallowayCount++;
+                }
+            }
+            System.out.println("Page " + (p + 3) + " Clarissa Count: " + clarissaCount);
+            System.out.println("Page " + (p + 3) + " Dalloway Count: " + dallowayCount);
         }
     }
 }

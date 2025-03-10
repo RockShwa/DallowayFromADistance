@@ -8,7 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 import java.util.*;
 
-public class HyphenSearch {
+public class ParenthesisSearch {
 
     static Document dallowayText;
     public static void main(String[] args) {
@@ -20,12 +20,13 @@ public class HyphenSearch {
 
         // load text into a String
         String text = dallowayText.text();
+        // System.out.println(text);
 
         // Elements paragraphs = dallowayText.select("p");
         // System.out.println(paragraphs);
 
-        // num of hyphens
-        int hyphenCount = 0;
+        // num of parantheses
+        int parenthesisCount = 0;
 
         String[] stringPages = text.split("Pg\\s+\\d+");
 
@@ -35,6 +36,10 @@ public class HyphenSearch {
         for (int i = 0; i < stringPages.length; i++) {
             pages.add(stringPages[i]);
         }
+
+        // cuts out all the copywrite stuff
+        int lastPageIndex = pages.size()-1;
+        String lastPage = pages.get(lastPageIndex).substring(0, pages.get(lastPageIndex).indexOf("THE END"));
 
         ArrayList<String[]> fullSplitText = new ArrayList<>(); 
 
@@ -47,19 +52,22 @@ public class HyphenSearch {
         //     System.out.println(Arrays.toString(fullSplitText.get(i)));
         // }
 
-        //iterate through string to find # of hyphens
+        // sets last page correctly w/o copywrite stuff
+        fullSplitText.set(fullSplitText.size() - 1, lastPage.split(" "));
+
+        // iterate through string to find # of parenthesis
         for (int p = 0; p < fullSplitText.size(); p++) {
             System.out.print("Page " + (p + 3) + ": ");
-            hyphenCount = 0;
+            parenthesisCount = 0;
             for (int w = 0; w < fullSplitText.get(p).length; w++) {
-                if (fullSplitText.get(p)[w].contains("-")) {
-                    hyphenCount++;
+                if (fullSplitText.get(p)[w].contains("(")) {
+                    parenthesisCount++;
                 } 
-                if (fullSplitText.get(p)[w].contains("—")) {
-                    hyphenCount++;
+                if (fullSplitText.get(p)[w].contains(")")) {
+                    parenthesisCount++;
                 }
             }
-            System.out.println(hyphenCount);
+            System.out.println(parenthesisCount);
         }
     }
 }
